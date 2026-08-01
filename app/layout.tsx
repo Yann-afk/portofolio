@@ -15,10 +15,10 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: `${placeholderProfile.name} — ${placeholderProfile.role}`,
+  title: `ammporto — ${placeholderProfile.name}`,
   description: placeholderProfile.tagline,
   openGraph: {
-    title: `${placeholderProfile.name} — ${placeholderProfile.role}`,
+    title: `ammporto — ${placeholderProfile.name}`,
     description: placeholderProfile.tagline,
     type: "website",
   },

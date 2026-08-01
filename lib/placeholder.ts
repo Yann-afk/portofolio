@@ -1,14 +1,14 @@
 import type { Experience, Profile, Project, Skill, Stat } from "./types";
 
 export const placeholderProfile: Profile = {
-  name: "Your Name",
-  username: "yourname",
+  name: "Abdullah Mubarok Maspeke",
+  username: "abdullahmaspeke",
   email: "hello@yourname.dev",
   role: "Full-Stack Developer",
   roles: ["Full-Stack Developer", "UI/UX Enthusiast", "Open Source Contributor"],
   tagline:
     "I build fast, accessible and delightful web experiences that people love to use.",
-  bio: "Hi! I'm Your Name, a Full-Stack Developer based in Jakarta, Indonesia. I love turning complex problems into simple, beautiful and intuitive products. When I'm not coding, you'll find me sketching UI ideas, contributing to open source, or exploring new tech.\n\nWith 3+ years of experience shipping products from idea to production, I care deeply about performance, clean code, and the little details that make a great user experience.",
+  bio: "Hi! I'm Abdullah Mubarok Maspeke, a Full-Stack Developer based in Jakarta, Indonesia. I love turning complex problems into simple, beautiful and intuitive products. When I'm not coding, you'll find me sketching UI ideas, contributing to open source, or exploring new tech.\n\nWith 3+ years of experience shipping products from idea to production, I care deeply about performance, clean code, and the little details that make a great user experience.",
   location: "Jakarta, Indonesia",
   availability: "Available for freelance",
   resume: "/resume.pdf",

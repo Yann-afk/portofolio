@@ -15,7 +15,7 @@ export default async function Home() {
 
   return (
     <>
-      <Navbar name={profile.name} />
+      <Navbar />
       <main className="flex-1">
         <Hero profile={profile} />
         <About

@@ -7,17 +7,7 @@ import { navLinks } from "@/lib/site";
 import { ThemeToggle } from "./theme-toggle";
 import { cn } from "@/lib/utils";
 
-function initialsOf(name: string) {
-  return name
-    .trim()
-    .split(/\s+/)
-    .map((w) => w[0])
-    .join("")
-    .toUpperCase()
-    .slice(0, 2);
-}
-
-export function Navbar({ name }: { name: string }) {
+export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -42,8 +32,8 @@ export function Navbar({ name }: { name: string }) {
           href="#home"
           className="font-mono text-sm font-bold tracking-tight text-zinc-900 dark:text-zinc-50"
         >
-          {initialsOf(name)}.
-          <span className="text-violet-600 dark:text-violet-400">dev</span>
+          amm
+          <span className="text-violet-600 dark:text-violet-400">porto</span>
         </a>
 
         <ul className="hidden items-center gap-1 md:flex">

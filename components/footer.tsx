@@ -1,16 +1,6 @@
 import type { Profile } from "@/lib/types";
 import { GitHubIcon, LinkedInIcon, XIcon, InstagramIcon } from "./icons";
 
-function initialsOf(name: string) {
-  return name
-    .trim()
-    .split(/\s+/)
-    .map((w) => w[0])
-    .join("")
-    .toUpperCase()
-    .slice(0, 2);
-}
-
 export function Footer({ profile }: { profile: Profile }) {
   const socials = [
     { label: "GitHub", href: profile.socials.github, Icon: GitHubIcon },
@@ -26,8 +16,8 @@ export function Footer({ profile }: { profile: Profile }) {
           href="#home"
           className="font-mono text-sm font-bold tracking-tight text-zinc-900 dark:text-zinc-50"
         >
-          {initialsOf(profile.name)}.
-          <span className="text-violet-600 dark:text-violet-400">dev</span>
+          amm
+          <span className="text-violet-600 dark:text-violet-400">porto</span>
         </a>
 
         <p className="text-center text-sm text-zinc-500 dark:text-zinc-400">

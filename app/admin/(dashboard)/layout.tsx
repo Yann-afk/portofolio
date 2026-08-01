@@ -4,7 +4,7 @@ import { getSessionUser } from "@/lib/db/auth";
 import { AdminNav } from "./admin-nav";
 
 export const metadata = {
-  title: "Admin — Portfolio",
+  title: "Admin — ammporto",
 };
 
 export default async function AdminLayout({
