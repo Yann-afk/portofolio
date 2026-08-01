@@ -1,12 +1,10 @@
 import type { Profile } from "@/lib/types";
-import { GitHubIcon, LinkedInIcon, XIcon, InstagramIcon } from "./icons";
+import { GitHubIcon, WhatsAppIcon } from "./icons";
 
 export function Footer({ profile }: { profile: Profile }) {
   const socials = [
     { label: "GitHub", href: profile.socials.github, Icon: GitHubIcon },
-    { label: "LinkedIn", href: profile.socials.linkedin, Icon: LinkedInIcon },
-    { label: "X", href: profile.socials.twitter, Icon: XIcon },
-    { label: "Instagram", href: profile.socials.instagram, Icon: InstagramIcon },
+    { label: "WhatsApp", href: profile.socials.whatsapp, Icon: WhatsAppIcon },
   ].filter((s) => Boolean(s.href));
 
   return (

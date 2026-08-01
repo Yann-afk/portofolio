@@ -13,9 +13,7 @@ import {
 
 const socialFields = [
   { key: "github", label: "GitHub URL" },
-  { key: "linkedin", label: "LinkedIn URL" },
-  { key: "twitter", label: "X / Twitter URL" },
-  { key: "instagram", label: "Instagram URL" },
+  { key: "whatsapp", label: "WhatsApp (wa.me/…) URL" },
 ] as const;
 
 export function SettingsForm({

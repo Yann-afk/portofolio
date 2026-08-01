@@ -16,7 +16,7 @@ function slugify(title: string) {
 }
 
 const fields = {
-  socials: ["github", "linkedin", "twitter", "instagram"] as const,
+  socials: ["github", "whatsapp"] as const,
 };
 
 export async function signIn(

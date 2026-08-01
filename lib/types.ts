@@ -1,5 +1,6 @@
 export interface Socials {
   github?: string;
+  whatsapp?: string;
   linkedin?: string;
   twitter?: string;
   instagram?: string;

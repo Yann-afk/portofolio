@@ -6,14 +6,12 @@ import { Check, Copy, Mail, MapPin, Send } from "lucide-react";
 import type { Profile } from "@/lib/types";
 import { SectionHeading } from "./section-heading";
 import { Reveal } from "./reveal";
-import { GitHubIcon, LinkedInIcon, XIcon, InstagramIcon } from "./icons";
+import { GitHubIcon, WhatsAppIcon } from "./icons";
 
 function buildSocials(profile: Profile) {
   return [
     { label: "GitHub", href: profile.socials.github, Icon: GitHubIcon },
-    { label: "LinkedIn", href: profile.socials.linkedin, Icon: LinkedInIcon },
-    { label: "X", href: profile.socials.twitter, Icon: XIcon },
-    { label: "Instagram", href: profile.socials.instagram, Icon: InstagramIcon },
+    { label: "WhatsApp", href: profile.socials.whatsapp, Icon: WhatsAppIcon },
   ].filter((s) => Boolean(s.href));
 }
 
@@ -23,6 +21,12 @@ export function Contact({ profile }: { profile: Profile }) {
   const [sent, setSent] = useState(false);
 
   const socials = buildSocials(profile);
+  const waNumber = (profile.socials.whatsapp ?? "")
+    .replace("https://wa.me/", "")
+    .replace("+", "");
+  const waDisplay = waNumber.startsWith("62")
+    ? `0${waNumber.slice(2)}`
+    : waNumber;
 
   const copyEmail = async () => {
     try {
@@ -125,6 +129,25 @@ export function Contact({ profile }: { profile: Profile }) {
                       </AnimatePresence>
                     </span>
                   </button>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-4">
+                <span className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-violet-100 text-violet-600 dark:bg-violet-500/10 dark:text-violet-400">
+                  <WhatsAppIcon className="h-5 w-5" />
+                </span>
+                <div>
+                  <p className="text-sm font-medium text-zinc-500 dark:text-zinc-400">
+                    Chat on WhatsApp
+                  </p>
+                  <a
+                    href={profile.socials.whatsapp}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-1 inline-block text-lg font-semibold text-zinc-900 transition-colors hover:text-violet-600 dark:text-zinc-50 dark:hover:text-violet-400"
+                  >
+                    {waDisplay}
+                  </a>
                 </div>
               </div>
 

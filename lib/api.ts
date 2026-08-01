@@ -42,9 +42,7 @@ function mapProfile(row: UserRow): Profile {
     avatarUrl: row.avatar_url,
     socials: {
       github: socials.github,
-      linkedin: socials.linkedin,
-      twitter: socials.twitter,
-      instagram: socials.instagram,
+      whatsapp: socials.whatsapp,
     },
   };
 }

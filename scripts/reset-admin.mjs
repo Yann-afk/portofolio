@@ -10,7 +10,6 @@
 // users table is empty, so after `delete` just open the site once and log in.
 
 import { createClient } from "@libsql/client";
-import { randomBytes, scryptSync } from "node:crypto";
 
 const url = process.env.TURSO_URL;
 const token = process.env.TURSO_AUTH_TOKEN;

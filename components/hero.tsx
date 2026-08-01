@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, Download, FileText } from "lucide-react";
-import { GitHubIcon, LinkedInIcon, XIcon, InstagramIcon } from "./icons";
+import { GitHubIcon, WhatsAppIcon } from "./icons";
 import type { Profile } from "@/lib/types";
 
 const container = {
@@ -90,9 +90,7 @@ export function Hero({ profile }: { profile: Profile }) {
 
   const socials = [
     { label: "GitHub", href: profile.socials.github, Icon: GitHubIcon },
-    { label: "LinkedIn", href: profile.socials.linkedin, Icon: LinkedInIcon },
-    { label: "X", href: profile.socials.twitter, Icon: XIcon },
-    { label: "Instagram", href: profile.socials.instagram, Icon: InstagramIcon },
+    { label: "WhatsApp", href: profile.socials.whatsapp, Icon: WhatsAppIcon },
   ].filter((s) => Boolean(s.href));
 
   useEffect(() => {

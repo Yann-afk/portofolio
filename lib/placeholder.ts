@@ -3,7 +3,7 @@ import type { Experience, Profile, Project, Skill, Stat } from "./types";
 export const placeholderProfile: Profile = {
   name: "Abdullah Mubarok Maspeke",
   username: "abdullahmaspeke",
-  email: "hello@yourname.dev",
+  email: "tzyyann07@gmail.com",
   role: "Full-Stack Developer",
   roles: ["Full-Stack Developer", "UI/UX Enthusiast", "Open Source Contributor"],
   tagline:
@@ -14,10 +14,8 @@ export const placeholderProfile: Profile = {
   resume: "/resume.pdf",
   avatarUrl: null,
   socials: {
-    github: "https://github.com/yourusername",
-    linkedin: "https://linkedin.com/in/yourusername",
-    twitter: "https://x.com/yourusername",
-    instagram: "https://instagram.com/yourusername",
+    github: "https://github.com/Yann-afk",
+    whatsapp: "https://wa.me/6289504472172",
   },
 };
 
