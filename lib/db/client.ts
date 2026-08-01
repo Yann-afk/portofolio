@@ -292,7 +292,10 @@ class SqliteQuery<T> {
       | ((reason: unknown) => TResult2 | PromiseLike<TResult2>)
       | null,
   ): Promise<TResult1 | TResult2> {
-    return this.execute().then(onfulfilled, onrejected);
+    return (this.execute() as unknown as Promise<Result<T[]>>).then(
+      onfulfilled,
+      onrejected,
+    );
   }
 
   private assertColumn(cols: Set<string>, col: string): string {
@@ -496,7 +499,10 @@ class SingleResult<T> {
       | ((reason: unknown) => TResult2 | PromiseLike<TResult2>)
       | null,
   ): Promise<TResult1 | TResult2> {
-    return this.query.executeSingle().then(onfulfilled, onrejected);
+    return (this.query.executeSingle() as unknown as Promise<Result<T>>).then(
+      onfulfilled,
+      onrejected,
+    );
   }
 }
 
