@@ -1,36 +1,61 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Portfolio
+
+Personal portfolio built with Next.js, Tailwind CSS, Framer Motion, and SQLite.
+
+## Tech Stack
+
+- **Next.js 16** (App Router, Turbopack, Server Actions, `proxy.ts`)
+- **Tailwind CSS v4** + `next-themes` (dark/light toggle, default dark)
+- **Framer Motion** for scroll animations
+- **SQLite** (`node:sqlite`, built into Node 24+) for data, sessions, and admin auth
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+No database setup is required. On first run the app creates
+`data/portofolio.db` automatically: tables are created and seeded from
+`data/demo.json` when present (otherwise placeholder content is used).
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Admin Panel
 
-## Learn More
+Sign in at [http://localhost:3000/admin/login](http://localhost:3000/admin/login)
+with the default account `admin@demo.dev` / `demo1234` — override both via
+`ADMIN_EMAIL` / `ADMIN_PASSWORD` in `.env.local`.
 
-To learn more about Next.js, take a look at the following resources:
+- `/admin` — dashboard with content counts and recent messages.
+- `/admin/projects` — create/edit/delete projects, pick skills, set category/featured.
+- `/admin/skills` — add/remove skills shown in the About marquee.
+- `/admin/experience` — work/education/organization/award timeline entries.
+- `/admin/messages` — read/toggle/delete contact form messages.
+- `/admin/settings` — edit the profile shown in Hero and About.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Admin routes are guarded by `proxy.ts` (verifies a signed, stateless session
+cookie) and re-checked in the layout. Passwords are stored as scrypt hashes.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Environment
 
-## Deploy on Vercel
+Copy `.env.example` to `.env.local` to override defaults:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+| Variable | Default | Purpose |
+| --- | --- | --- |
+| `SESSION_SECRET` | `local-dev-secret-change-me` | Signs the `admin_session` cookie — set a strong value in production |
+| `DATABASE_PATH` | `data/portofolio.db` | SQLite database file location |
+| `ADMIN_EMAIL` | `admin@demo.dev` | Default admin email created on first run |
+| `ADMIN_PASSWORD` | `demo1234` | Default admin password created on first run |
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+> Note: changing `ADMIN_EMAIL` / `ADMIN_PASSWORD` after first run does not update
+> an existing database. Delete `data/portofolio.db` (or edit the row in the
+> `users` table) to reset the account.
+
+## Scripts
+
+- `npm run dev` — development server
+- `npm run build` — production build
+- `npm run start` — serve production build
+- `npm run lint` — ESLint

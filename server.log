@@ -1,0 +1,38 @@
+
+> portofolio@0.1.0 start
+> next start
+
+▲ Next.js 16.2.12
+- Local:         http://localhost:3000
+- Network:       http://10.100.21.207:3000
+✓ Ready in 624ms
+⨯ Error: Supabase admin is not configured. Set NEXT_PUBLIC_SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY in .env.local
+    at <unknown> (C:\Users\ADVAN\Documents\new\portofolio\.next\server\chunks\ssr\_0o11yad._.js:1:438)
+    at l (C:\Users\ADVAN\Documents\new\portofolio\.next\server\chunks\ssr\[root-of-the-server]__1g0b5cx._.js:1:13839)
+    at stringify (<anonymous>) {
+  digest: '191024635'
+}
+⨯ Error: Supabase admin is not configured. Set NEXT_PUBLIC_SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY in .env.local
+    at <unknown> (C:\Users\ADVAN\Documents\new\portofolio\.next\server\chunks\ssr\_0o11yad._.js:1:438)
+    at h (C:\Users\ADVAN\Documents\new\portofolio\.next\server\chunks\ssr\[root-of-the-server]__180642n._.js:1:12650)
+    at stringify (<anonymous>) {
+  digest: '3986928626'
+}
+⨯ Error: Supabase admin is not configured. Set NEXT_PUBLIC_SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY in .env.local
+    at <unknown> (C:\Users\ADVAN\Documents\new\portofolio\.next\server\chunks\ssr\_0o11yad._.js:1:438)
+    at h (C:\Users\ADVAN\Documents\new\portofolio\.next\server\chunks\ssr\[root-of-the-server]__1c6ffe8._.js:1:11432)
+    at stringify (<anonymous>) {
+  digest: '2796033417'
+}
+⨯ Error: Supabase is not configured. Set NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY in .env.local
+    at f (C:\Users\ADVAN\Documents\new\portofolio\.next\server\chunks\ssr\_0_xhbrb._.js:4:29835)
+    at g (C:\Users\ADVAN\Documents\new\portofolio\.next\server\chunks\ssr\[root-of-the-server]__0mph01n._.js:1:10331)
+    at stringify (<anonymous>) {
+  digest: '1128407382'
+}
+⨯ Error: Supabase admin is not configured. Set NEXT_PUBLIC_SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY in .env.local
+    at <unknown> (C:\Users\ADVAN\Documents\new\portofolio\.next\server\chunks\ssr\_0o11yad._.js:1:438)
+    at l (C:\Users\ADVAN\Documents\new\portofolio\.next\server\chunks\ssr\[root-of-the-server]__1g0b5cx._.js:1:13839)
+    at stringify (<anonymous>) {
+  digest: '191024635'
+}
