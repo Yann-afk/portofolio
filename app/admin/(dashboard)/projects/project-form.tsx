@@ -1,6 +1,6 @@
 "use client";
 
-import { useActionState } from "react";
+import { useActionState, useState } from "react";
 import type { Skill } from "@/lib/types";
 import type { ActionResult } from "../actions";
 import {
@@ -42,6 +42,19 @@ export function ProjectForm({
   submitLabel: string;
 }) {
   const [state, formAction] = useActionState(action, undefined);
+  const [selected, setSelected] = useState<Set<string>>(
+    () => new Set(initial?.skillIds ?? []),
+  );
+
+  const allSelected = skills.length > 0 && selected.size === skills.length;
+
+  const toggleSkill = (id: string) =>
+    setSelected((prev) => {
+      const next = new Set(prev);
+      if (next.has(id)) next.delete(id);
+      else next.add(id);
+      return next;
+    });
 
   return (
     <form
@@ -120,9 +133,28 @@ export function ProjectForm({
       </div>
 
       <fieldset>
-        <legend className="mb-2 text-sm font-medium text-zinc-700 dark:text-zinc-300">
-          Skills yang dipakai
-        </legend>
+        <legend className="sr-only">Skills yang dipakai</legend>
+        <div className="mb-3 flex flex-wrap items-center justify-between gap-3">
+          <span className="text-sm font-medium text-zinc-700 dark:text-zinc-300">
+            Skills yang dipakai
+          </span>
+          <div className="flex items-center gap-3 text-xs">
+            <span className="tabular-nums text-zinc-500 dark:text-zinc-400">
+              {selected.size}/{skills.length} dipilih
+            </span>
+            <button
+              type="button"
+              onClick={() =>
+                setSelected(
+                  allSelected ? new Set<string>() : new Set(skills.map((s) => s.id)),
+                )
+              }
+              className="rounded-lg border border-zinc-200 px-2.5 py-1 font-medium text-zinc-700 transition-colors hover:border-violet-400 hover:text-violet-700 dark:border-zinc-800 dark:text-zinc-300 dark:hover:border-violet-600 dark:hover:text-violet-300"
+            >
+              {allSelected ? "Kosongkan semua" : "Pilih semua"}
+            </button>
+          </div>
+        </div>
         <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
           {skills.map((skill) => (
             <label
@@ -133,13 +165,19 @@ export function ProjectForm({
                 type="checkbox"
                 name="skills"
                 value={skill.id}
-                defaultChecked={initial?.skillIds.includes(skill.id)}
+                checked={selected.has(skill.id)}
+                onChange={() => toggleSkill(skill.id)}
                 className="h-4 w-4 accent-violet-600"
               />
               {skill.name}
             </label>
           ))}
         </div>
+        {skills.length === 0 ? (
+          <p className="text-sm text-zinc-500 dark:text-zinc-400">
+            Belum ada skill. Tambahkan di halaman Skills dulu.
+          </p>
+        ) : null}
       </fieldset>
 
       <div className="flex items-center gap-3 pt-2">
