@@ -3,6 +3,7 @@ import { SESSION_MAX_AGE, SESSION_SECRET, assertSessionSecretConfigured } from "
 export interface SessionPayload {
   uid: string;
   exp: number;
+  pv: string;
 }
 
 function b64encode(data: Uint8Array): string {
@@ -31,10 +32,12 @@ async function sign(data: Uint8Array): Promise<Uint8Array> {
   return new Uint8Array(await crypto.subtle.sign("HMAC", key, new Uint8Array(data)));
 }
 
-export async function createSessionToken(uid: string): Promise<string> {
+export async function createSessionToken(uid: string, pv: string): Promise<string> {
   assertSessionSecretConfigured();
   const exp = Math.floor(Date.now() / 1000) + SESSION_MAX_AGE;
-  const payload = b64encode(new TextEncoder().encode(JSON.stringify({ uid, exp })));
+  const payload = b64encode(
+    new TextEncoder().encode(JSON.stringify({ uid, exp, pv })),
+  );
   const signature = b64encode(await sign(new TextEncoder().encode(payload)));
   return `${payload}.${signature}`;
 }
@@ -49,6 +52,7 @@ function timingSafeEqual(a: Uint8Array, b: Uint8Array): boolean {
 export async function verifySessionToken(
   token: string | undefined,
 ): Promise<SessionPayload | null> {
+  assertSessionSecretConfigured();
   if (!token) return null;
   const [payload, signature] = token.split(".");
   if (!payload || !signature) return null;
@@ -61,8 +65,9 @@ export async function verifySessionToken(
     if (typeof parsed.uid !== "string" || typeof parsed.exp !== "number") {
       return null;
     }
+    if (typeof parsed.pv !== "string") return null;
     if (parsed.exp < Math.floor(Date.now() / 1000)) return null;
-    return { uid: parsed.uid, exp: parsed.exp };
+    return { uid: parsed.uid, exp: parsed.exp, pv: parsed.pv };
   } catch {
     return null;
   }

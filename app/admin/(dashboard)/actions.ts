@@ -3,9 +3,13 @@
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { createAdminClient } from "@/lib/db/client";
-import { getSessionUser, signIn as dbSignIn, signOut as dbSignOut } from "@/lib/db/auth";
+import { signIn as dbSignIn, signOut as dbSignOut } from "@/lib/db/auth";
+import { hashPassword, verifyPassword } from "@/lib/db/password";
+import { requireSessionUser } from "@/lib/db/require-session";
 
-export type ActionResult = { error?: string };
+export type ActionResult = { error?: string; success?: string };
+
+const MIN_PASSWORD_LENGTH = 8;
 
 function slugify(title: string) {
   return title
@@ -34,6 +38,7 @@ export async function signIn(
 }
 
 export async function signOut() {
+  await requireSessionUser();
   await dbSignOut();
   revalidatePath("/admin", "layout");
   redirect("/admin/login");
@@ -60,6 +65,7 @@ export async function createProject(
   _prev: ActionResult | undefined,
   formData: FormData,
 ): Promise<ActionResult> {
+  await requireSessionUser();
   const admin = createAdminClient();
   const rawSlug = String(formData.get("slug") ?? "");
   const title = String(formData.get("title") ?? "");
@@ -98,6 +104,7 @@ export async function updateProject(
   _prev: ActionResult | undefined,
   formData: FormData,
 ): Promise<ActionResult> {
+  await requireSessionUser();
   const admin = createAdminClient();
   const rawSlug = String(formData.get("slug") ?? "");
   const title = String(formData.get("title") ?? "");
@@ -127,6 +134,7 @@ export async function updateProject(
 }
 
 export async function deleteProject(id: string) {
+  await requireSessionUser();
   const admin = createAdminClient();
   await admin.from("projects").delete().eq("id", id);
   revalidatePath("/", "layout");
@@ -141,6 +149,7 @@ export async function createSkill(
   _prev: ActionResult | undefined,
   formData: FormData,
 ): Promise<ActionResult> {
+  await requireSessionUser();
   const admin = createAdminClient();
   const { error } = await admin.from("skills").insert({
     name: String(formData.get("name") ?? ""),
@@ -155,6 +164,7 @@ export async function createSkill(
 }
 
 export async function deleteSkill(id: string) {
+  await requireSessionUser();
   const admin = createAdminClient();
   await admin.from("skills").delete().eq("id", id);
   revalidatePath("/", "layout");
@@ -184,6 +194,7 @@ export async function createExperience(
   _prev: ActionResult | undefined,
   formData: FormData,
 ): Promise<ActionResult> {
+  await requireSessionUser();
   const admin = createAdminClient();
   const { error } = await admin
     .from("experiences")
@@ -198,6 +209,7 @@ export async function updateExperience(
   _prev: ActionResult | undefined,
   formData: FormData,
 ): Promise<ActionResult> {
+  await requireSessionUser();
   const admin = createAdminClient();
   const { error } = await admin
     .from("experiences")
@@ -209,6 +221,7 @@ export async function updateExperience(
 }
 
 export async function deleteExperience(id: string) {
+  await requireSessionUser();
   const admin = createAdminClient();
   await admin.from("experiences").delete().eq("id", id);
   revalidatePath("/", "layout");
@@ -220,12 +233,14 @@ export async function deleteExperience(id: string) {
 // ------------------------------------------------------------
 
 export async function toggleMessageRead(id: string, isRead: boolean) {
+  await requireSessionUser();
   const admin = createAdminClient();
   await admin.from("messages").update({ is_read: isRead }).eq("id", id);
   revalidatePath("/admin/messages");
 }
 
 export async function deleteMessage(id: string) {
+  await requireSessionUser();
   const admin = createAdminClient();
   await admin.from("messages").delete().eq("id", id);
   revalidatePath("/admin/messages");
@@ -239,8 +254,7 @@ export async function updateProfile(
   _prev: ActionResult | undefined,
   formData: FormData,
 ): Promise<ActionResult> {
-  const session = await getSessionUser();
-  if (!session) return { error: "Not authenticated." };
+  const session = await requireSessionUser();
 
   const socials = {} as Record<string, string>;
   for (const key of fields.socials) {
@@ -276,4 +290,49 @@ export async function updateProfile(
   if (error) return { error: error.message };
   revalidatePath("/", "layout");
   redirect("/admin/settings");
+}
+
+export async function changePassword(
+  _prev: ActionResult | undefined,
+  formData: FormData,
+): Promise<ActionResult> {
+  const session = await requireSessionUser();
+
+  const current = String(formData.get("current_password") ?? "");
+  const next = String(formData.get("new_password") ?? "");
+  const confirm = String(formData.get("confirm_password") ?? "");
+
+  if (next.length < MIN_PASSWORD_LENGTH) {
+    return { error: `Password baru minimal ${MIN_PASSWORD_LENGTH} karakter.` };
+  }
+  if (next !== confirm) {
+    return { error: "Konfirmasi password tidak cocok." };
+  }
+  if (next === current) {
+    return { error: "Password baru harus berbeda dari password lama." };
+  }
+
+  const admin = createAdminClient();
+  const { data } = await admin
+    .from("users")
+    .select("id, password_hash")
+    .eq("id", session.id)
+    .single();
+
+  const stored = (data as { password_hash?: string | null } | null)?.password_hash;
+  if (!verifyPassword(current, stored)) {
+    return { error: "Password saat ini salah." };
+  }
+
+  const { error } = await admin
+    .from("users")
+    .update({ password_hash: hashPassword(next) })
+    .eq("id", session.id);
+  if (error) return { error: error.message };
+
+  revalidatePath("/admin/settings");
+  return {
+    success:
+      "Password berhasil diubah. Sesi di perangkat lain sudah otomatis keluar.",
+  };
 }

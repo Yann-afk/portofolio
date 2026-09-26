@@ -10,6 +10,13 @@ export const LOGIN_LIMIT: RateLimitOptions = {
   max: 10,
 };
 
+// Tighter than the per-IP budget: a single account should not survive ten
+// guesses even when they arrive from different addresses.
+export const LOGIN_EMAIL_LIMIT: RateLimitOptions = {
+  windowMs: 15 * 60 * 1000,
+  max: 5,
+};
+
 export const MESSAGE_LIMIT: RateLimitOptions = {
   windowMs: 10 * 60 * 1000,
   max: 5,

@@ -24,19 +24,47 @@ No database setup is required. On first run the app creates
 
 ## Admin Panel
 
-Sign in at [http://localhost:3000/admin/login](http://localhost:3000/admin/login)
-with the default account `admin@demo.dev` / `demo1234` — override both via
-`ADMIN_EMAIL` / `ADMIN_PASSWORD` in `.env.local`.
+Sign in at [http://localhost:3000/admin/login](http://localhost:3000/admin/login).
+
+On a **fresh** database the admin account is seeded from `ADMIN_EMAIL` /
+`ADMIN_PASSWORD`, which fall back to `admin@demo.dev` / `demo1234`. Those
+fallbacks are development conveniences only — set both variables before you
+deploy. Seeding runs **only when the `users` table is empty**
+(`lib/db/database.ts`), so changing the variables later does not touch an
+existing account.
 
 - `/admin` — dashboard with content counts and recent messages.
 - `/admin/projects` — create/edit/delete projects, pick skills, set category/featured.
 - `/admin/skills` — add/remove skills shown in the About marquee.
 - `/admin/experience` — work/education/organization/award timeline entries.
 - `/admin/messages` — read/toggle/delete contact form messages.
-- `/admin/settings` — edit the profile shown in Hero and About.
+- `/admin/settings` — edit the profile shown in Hero and About, and change the
+  admin password.
 
-Admin routes are guarded by `proxy.ts` (verifies a signed, stateless session
-cookie) and re-checked in the layout. Passwords are stored as scrypt hashes.
+Every mutating server action calls `requireSessionUser()`
+(`lib/db/require-session.ts`) before touching the database, so the actions are
+safe independently of `proxy.ts`, which is only a routing-level convenience.
+Passwords are stored as scrypt hashes.
+
+The session cookie carries the salt of the password it was issued against, so
+changing the password invalidates every existing session on every device.
+
+### Locked out?
+
+The `users` table doubles as the profile table, so do **not** delete rows to
+reset a password — that discards your name, bio, socials, avatar and resume,
+and the re-seed restores `data/demo.json` values. Use the password command,
+which only rewrites `password_hash`:
+
+```bash
+export TURSO_URL="libsql://..."
+export TURSO_AUTH_TOKEN="..."
+npm run admin:list                                  # which accounts exist
+npm run admin:password -- you@example.com 'new-password'
+```
+
+Locally, point `TURSO_URL` at the SQLite file instead
+(`file:data/portofolio.db`) to run the same commands offline.
 
 ## Environment
 
@@ -44,10 +72,10 @@ Copy `.env.example` to `.env.local` to override defaults:
 
 | Variable | Default | Purpose |
 | --- | --- | --- |
-| `SESSION_SECRET` | `local-dev-secret-change-me` | Signs the `admin_session` cookie — set a strong value in production |
+| `SESSION_SECRET` | `local-dev-secret-change-me` | Signs the `admin_session` cookie. **Required in production** — the app throws on startup/login while the default is set |
 | `DATABASE_PATH` | `data/portofolio.db` | SQLite database file location |
-| `ADMIN_EMAIL` | `admin@demo.dev` | Default admin email created on first run |
-| `ADMIN_PASSWORD` | `demo1234` | Default admin password created on first run |
+| `ADMIN_EMAIL` | `admin@demo.dev` | Admin email, used only when seeding an empty `users` table |
+| `ADMIN_PASSWORD` | `demo1234` | Admin password, used only when seeding an empty `users` table |
 | `TURSO_URL` | *(unset)* | When set, the app uses Turso/libSQL instead of the local file (see below) |
 | `TURSO_AUTH_TOKEN` | *(unset)* | Turso auth token for `TURSO_URL` |
 
@@ -74,16 +102,19 @@ no credit card required.
    - `SESSION_SECRET` = a long random string
    - `ADMIN_EMAIL` / `ADMIN_PASSWORD` = your admin credentials
 
+   Generate the secret with `openssl rand -base64 32`. Without it the app
+   refuses to sign or verify sessions in production.
+
 3. Push to the connected Git repo. On first request the Turso database
    auto-creates its tables and seeds placeholder content (the local
    `data/demo.json` is git-ignored and not deployed).
 
 The database layer is interchangeable: with `TURSO_URL` set it talks to Turso;
-otherwise it uses the local SQLite file.
+otherwise it uses the local SQLite file. **These are separate databases** — a
+password reset run against the local file has no effect on the deployed site.
 
 > Note: changing `ADMIN_EMAIL` / `ADMIN_PASSWORD` after first run does not update
-> an existing database. Delete `data/portofolio.db` (or edit the row in the
-> `users` table) to reset the account.
+> an existing database. Use `npm run admin:password` (see [Locked out?](#locked-out)).
 
 ## Scripts
 
@@ -91,3 +122,6 @@ otherwise it uses the local SQLite file.
 - `npm run build` — production build
 - `npm run start` — serve production build
 - `npm run lint` — ESLint
+- `npm run typecheck` — `tsc --noEmit`
+- `npm run admin:list` — list admin accounts in the configured database
+- `npm run admin:password` — set a password for an account

@@ -175,3 +175,12 @@ export function ErrorNotice({ error }: { error?: string }) {
     </p>
   );
 }
+
+export function SuccessNotice({ success }: { success?: string }) {
+  if (!success) return null;
+  return (
+    <p className="rounded-xl border border-emerald-300 bg-emerald-50 px-4 py-3 text-sm font-medium text-emerald-700 dark:border-emerald-900 dark:bg-emerald-950/40 dark:text-emerald-400">
+      {success}
+    </p>
+  );
+}

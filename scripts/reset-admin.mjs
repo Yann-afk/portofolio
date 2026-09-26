@@ -4,12 +4,19 @@
 //   $env:TURSO_URL="libsql://..."
 //   $env:TURSO_AUTH_TOKEN="..."
 //   node scripts/reset-admin.mjs list     # show the users rows
-//   node scripts/reset-admin.mjs delete   # delete all users (app re-seeds on next request)
+//   node scripts/reset-admin.mjs password <email> <password>
+//   node scripts/reset-admin.mjs delete --yes   # DESTRUCTIVE, see below
 //
 // The app seeds the admin account from ADMIN_EMAIL / ADMIN_PASSWORD whenever the
 // users table is empty, so after `delete` just open the site once and log in.
+//
+// `delete` is destructive: the users table is also the profile (name, bio,
+// socials, avatar, resume), and the re-seed restores demo.json values, so your
+// profile is lost. Prefer `password` — it only touches password_hash and is
+// what you want in every "I can't log in" situation.
 
 import { createClient } from "@libsql/client";
+import { randomBytes, scryptSync } from "node:crypto";
 
 const url = process.env.TURSO_URL;
 const token = process.env.TURSO_AUTH_TOKEN;
@@ -20,8 +27,8 @@ if (!url) {
 }
 
 const command = process.argv[2] ?? "list";
-if (command !== "list" && command !== "delete") {
-  console.error('Usage: node scripts/reset-admin.mjs [list|delete]');
+if (command !== "list" && command !== "delete" && command !== "password") {
+  console.error('Usage: node scripts/reset-admin.mjs [list|delete|password] [email] [password]');
   process.exit(1);
 }
 
@@ -39,10 +46,42 @@ if (command === "list") {
     }`);
   }
 } else if (command === "delete") {
+  if (!process.argv.includes("--yes")) {
+    console.error("Refusing to run: `delete` also erases the profile stored in `users`.");
+    console.error("Use `password <email> <password>` instead — it only changes password_hash.");
+    console.error("If you really do want a wipe, re-run with --yes.");
+    process.exit(1);
+  }
   const result = await db.execute("DELETE FROM users");
   console.log(`Deleted ${result.rowsAffected} user row(s).`);
   console.log("Next request to the site will re-seed the admin from ADMIN_EMAIL / ADMIN_PASSWORD.");
   console.log("(Only if ADMIN_EMAIL / ADMIN_PASSWORD env vars are set correctly in Vercel!)");
+} else if (command === "password") {
+  const email = (process.argv[3] ?? "").trim().toLowerCase();
+  const password = process.argv[4];
+
+  if (!email || !password) {
+    console.error("Usage: node scripts/reset-admin.mjs password <email> <password>");
+    process.exit(1);
+  }
+
+  const existing = await db.execute({
+    sql: "SELECT id FROM users WHERE email = ?",
+    args: [email],
+  });
+  if (existing.rows.length === 0) {
+    console.error(`No user with email ${email}. Run \`list\` to see the accounts.`);
+    process.exit(1);
+  }
+
+  const salt = randomBytes(16).toString("hex");
+  const hash = scryptSync(password, salt, 64).toString("hex");
+  const result = await db.execute({
+    sql: "UPDATE users SET password_hash = ? WHERE email = ?",
+    args: [`${salt}:${hash}`, email],
+  });
+  console.log(`Updated password for ${email} (${result.rowsAffected} row).`);
+  console.log("Only password_hash changed — the profile columns are untouched.");
 }
 
 process.exit(0);

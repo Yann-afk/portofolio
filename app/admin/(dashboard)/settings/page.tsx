@@ -1,6 +1,7 @@
 import { createAdminClient } from "@/lib/db/client";
 import { getSessionUser } from "@/lib/db/auth";
 import { PageHeader } from "../admin-ui";
+import { PasswordForm } from "./password-form";
 import { SettingsForm } from "./settings-form";
 
 export const dynamic = "force-dynamic";
@@ -43,12 +44,15 @@ export default async function SettingsPage() {
   };
 
   return (
-    <div>
-      <PageHeader
-        title="Settings"
-        description="Profil yang tampil di Hero dan About."
-      />
-      <SettingsForm profile={values} />
+    <div className="flex flex-col gap-8">
+      <div>
+        <PageHeader
+          title="Settings"
+          description="Profil yang tampil di Hero dan About."
+        />
+        <SettingsForm profile={values} />
+      </div>
+      <PasswordForm />
     </div>
   );
 }
