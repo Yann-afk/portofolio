@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Plus } from "lucide-react";
 import { createAdminClient } from "@/lib/db/client";
+import { projectCategoryLabel } from "@/lib/site";
 import { DeleteButton, PageHeader } from "../admin-ui";
 import { deleteProject } from "../actions";
 
@@ -55,7 +56,7 @@ export default async function ProjectsPage() {
                     </span>
                   ) : null}
                   <span className="rounded-full bg-zinc-100 px-2 py-0.5 font-mono text-xs text-zinc-600 dark:bg-zinc-800 dark:text-zinc-400">
-                    {p.category}
+                    {projectCategoryLabel(p.category)}
                   </span>
                 </div>
                 <p className="mt-1 truncate font-mono text-xs text-zinc-400">

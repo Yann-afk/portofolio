@@ -2,6 +2,7 @@
 
 import { useActionState, useState } from "react";
 import type { Skill } from "@/lib/types";
+import { isProjectCategory, projectCategoryOptions } from "@/lib/site";
 import type { ActionResult } from "../actions";
 import {
   Checkbox,
@@ -90,10 +91,17 @@ export function ProjectForm({
           />
         </Field>
         <Field label="Category">
-          <Select name="category" defaultValue={initial?.category ?? "web"}>
-            <option value="web">Web</option>
-            <option value="mobile">Mobile</option>
-            <option value="uiux">UI/UX</option>
+          <Select
+            name="category"
+            defaultValue={
+              isProjectCategory(initial?.category) ? initial.category : "web"
+            }
+          >
+            {projectCategoryOptions.map((option) => (
+              <option key={option.id} value={option.id}>
+                {option.label}
+              </option>
+            ))}
           </Select>
         </Field>
       </div>

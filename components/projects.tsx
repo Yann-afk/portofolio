@@ -107,6 +107,12 @@ export function Projects({ projects }: { projects: Project[] }) {
       ? projects
       : projects.filter((p) => p.category === active);
 
+  // Only offer filters that lead somewhere, otherwise a category with no
+  // projects renders an empty grid with no obvious way back.
+  const availableCategories = projectCategories.filter(
+    (cat) => cat.id === "all" || projects.some((p) => p.category === cat.id),
+  );
+
   return (
     <section id="projects" className="relative py-24 sm:py-32">
       <div className="mx-auto max-w-6xl px-6">
@@ -120,7 +126,7 @@ export function Projects({ projects }: { projects: Project[] }) {
 
         <Reveal delay={0.1}>
           <div className="mb-10 flex flex-wrap gap-2">
-            {projectCategories.map((cat) => (
+            {availableCategories.map((cat) => (
               <button
                 key={cat.id}
                 type="button"

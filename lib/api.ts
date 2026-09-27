@@ -7,6 +7,7 @@ import type {
   Skill,
   Stat,
 } from "./types";
+import { normalizeProjectCategory } from "./site";
 import {
   placeholderExperiences,
   placeholderProfile,
@@ -67,8 +68,7 @@ function mapProject(row: {
     coverImageUrl: row.cover_image_url,
     liveUrl: row.live_url,
     githubUrl: row.github_url,
-    category:
-      row.category === "mobile" || row.category === "uiux" ? row.category : "web",
+    category: normalizeProjectCategory(row.category),
     featured: row.featured,
     skills: row.skills?.map((s) => s.name) ?? [],
   };

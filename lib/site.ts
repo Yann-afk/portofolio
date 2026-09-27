@@ -1,5 +1,3 @@
-import type { ProjectCategory } from "./types";
-
 export const navLinks = [
   { label: "About", href: "#about" },
   { label: "Projects", href: "#projects" },
@@ -7,14 +5,50 @@ export const navLinks = [
   { label: "Contact", href: "#contact" },
 ];
 
-export const projectCategories: Array<{
-  id: ProjectCategory | "all";
-  label: string;
-}> = [
-  { id: "all", label: "All" },
-  { id: "web", label: "Web" },
-  { id: "mobile", label: "Mobile" },
+/**
+ * Single source of truth for project categories. The admin form, the admin
+ * list badge, the public filter pills, the read path, and the write path all
+ * derive from this list, so adding a category here is enough.
+ */
+export const projectCategoryOptions = [
+  { id: "web", label: "Web App" },
+  { id: "website", label: "Website" },
+  { id: "mobile", label: "Mobile App" },
+  { id: "desktop", label: "Desktop App" },
+  { id: "backend", label: "Backend / API" },
   { id: "uiux", label: "UI/UX" },
+  { id: "ai", label: "AI / Machine Learning" },
+  { id: "game", label: "Game" },
+  { id: "opensource", label: "Open Source" },
+  { id: "experiment", label: "Experiment" },
+] as const;
+
+export type ProjectCategory = (typeof projectCategoryOptions)[number]["id"];
+
+export function isProjectCategory(value: unknown): value is ProjectCategory {
+  return (
+    typeof value === "string" &&
+    projectCategoryOptions.some((option) => option.id === value)
+  );
+}
+
+/** Unknown or legacy values fall back to the default rather than rendering blank. */
+export function normalizeProjectCategory(value: unknown): ProjectCategory {
+  return isProjectCategory(value) ? value : "web";
+}
+
+export function projectCategoryLabel(value: string): string {
+  return (
+    projectCategoryOptions.find((option) => option.id === value)?.label ?? value
+  );
+}
+
+/** Filter pills for the public site: "All" plus every real category. */
+export const projectCategories = [
+  { id: "all" as const, label: "All" },
+  ...projectCategoryOptions.map(
+    (option) => option as { id: ProjectCategory; label: string },
+  ),
 ];
 
 export const projectGradients = [

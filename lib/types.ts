@@ -1,3 +1,7 @@
+import type { ProjectCategory } from "./site";
+
+export type { ProjectCategory } from "./site";
+
 export interface Socials {
   github?: string;
   whatsapp?: string;
@@ -25,8 +29,6 @@ export interface Stat {
   value: string;
   label: string;
 }
-
-export type ProjectCategory = "web" | "mobile" | "uiux";
 
 export interface Project {
   id: string;

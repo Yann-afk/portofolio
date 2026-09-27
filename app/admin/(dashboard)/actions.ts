@@ -6,10 +6,33 @@ import { createAdminClient } from "@/lib/db/client";
 import { signIn as dbSignIn, signOut as dbSignOut } from "@/lib/db/auth";
 import { hashPassword, verifyPassword } from "@/lib/db/password";
 import { requireSessionUser } from "@/lib/db/require-session";
+import { isProjectCategory, type ProjectCategory } from "@/lib/site";
 
 export type ActionResult = { error?: string; success?: string };
 
 const MIN_PASSWORD_LENGTH = 8;
+
+/** Rejects unknown categories instead of writing whatever the form posted. */
+function readProjectCategory(formData: FormData): ProjectCategory | null {
+  const value = String(formData.get("category") ?? "").trim();
+  return isProjectCategory(value) ? value : null;
+}
+
+function projectPayload(formData: FormData, category: ProjectCategory) {
+  const rawSlug = String(formData.get("slug") ?? "");
+  const title = String(formData.get("title") ?? "");
+  return {
+    title,
+    slug: rawSlug || slugify(title),
+    description: String(formData.get("description") ?? ""),
+    cover_image_url: String(formData.get("cover_image_url") ?? "") || null,
+    live_url: String(formData.get("live_url") ?? "") || null,
+    github_url: String(formData.get("github_url") ?? "") || null,
+    category,
+    featured: formData.get("featured") === "on",
+    sort_order: Number(formData.get("sort_order") ?? 0) || 0,
+  };
+}
 
 function slugify(title: string) {
   return title
@@ -67,19 +90,9 @@ export async function createProject(
 ): Promise<ActionResult> {
   await requireSessionUser();
   const admin = createAdminClient();
-  const rawSlug = String(formData.get("slug") ?? "");
-  const title = String(formData.get("title") ?? "");
-  const payload = {
-    title,
-    slug: rawSlug || slugify(title),
-    description: String(formData.get("description") ?? ""),
-    cover_image_url: String(formData.get("cover_image_url") ?? "") || null,
-    live_url: String(formData.get("live_url") ?? "") || null,
-    github_url: String(formData.get("github_url") ?? "") || null,
-    category: String(formData.get("category") ?? "web"),
-    featured: formData.get("featured") === "on",
-    sort_order: Number(formData.get("sort_order") ?? 0) || 0,
-  };
+  const category = readProjectCategory(formData);
+  if (!category) return { error: "Pilih kategori project yang valid." };
+  const payload = projectPayload(formData, category);
 
   const { data, error } = await admin
     .from("projects")
@@ -106,19 +119,9 @@ export async function updateProject(
 ): Promise<ActionResult> {
   await requireSessionUser();
   const admin = createAdminClient();
-  const rawSlug = String(formData.get("slug") ?? "");
-  const title = String(formData.get("title") ?? "");
-  const payload = {
-    title,
-    slug: rawSlug || slugify(title),
-    description: String(formData.get("description") ?? ""),
-    cover_image_url: String(formData.get("cover_image_url") ?? "") || null,
-    live_url: String(formData.get("live_url") ?? "") || null,
-    github_url: String(formData.get("github_url") ?? "") || null,
-    category: String(formData.get("category") ?? "web"),
-    featured: formData.get("featured") === "on",
-    sort_order: Number(formData.get("sort_order") ?? 0) || 0,
-  };
+  const category = readProjectCategory(formData);
+  if (!category) return { error: "Pilih kategori project yang valid." };
+  const payload = projectPayload(formData, category);
 
   const { error } = await admin.from("projects").update(payload).eq("id", id);
   if (error) return { error: error.message };
