@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { createAdminClient } from "@/lib/db/client";
+import { experienceTypeLabel } from "@/lib/site";
 import { DeleteButton, PageHeader } from "../admin-ui";
 import { createExperience, deleteExperience } from "../actions";
 import { ExperienceForm } from "./experience-form";
@@ -7,7 +8,7 @@ import { ExperienceForm } from "./experience-form";
 export const dynamic = "force-dynamic";
 
 export const metadata = {
-  title: "Experience — Admin",
+  title: "Pengalaman — Admin",
 };
 
 export default async function ExperiencePage() {
@@ -20,11 +21,11 @@ export default async function ExperiencePage() {
   return (
     <div>
       <PageHeader
-        title="Experience"
+        title="Pengalaman"
         description="Riwayat kerja, pendidikan, organisasi, dan penghargaan."
       />
 
-      <ExperienceForm action={createExperience} submitLabel="Add entry" />
+      <ExperienceForm action={createExperience} submitLabel="Tambah entri" />
 
       <div className="mt-8">
         {experiences && experiences.length > 0 ? (
@@ -41,11 +42,11 @@ export default async function ExperiencePage() {
                     </h3>
                     <span className="text-sm text-zinc-400">@ {e.company_name}</span>
                     <span className="rounded-full bg-zinc-100 px-2 py-0.5 font-mono text-xs text-zinc-600 dark:bg-zinc-800 dark:text-zinc-400">
-                      {e.type}
+                      {experienceTypeLabel(e.type)}
                     </span>
                     {e.is_current ? (
                       <span className="rounded-full bg-violet-100 px-2 py-0.5 font-mono text-xs font-medium text-violet-700 dark:bg-violet-500/10 dark:text-violet-400">
-                        current
+                        sedang berjalan
                       </span>
                     ) : null}
                   </div>

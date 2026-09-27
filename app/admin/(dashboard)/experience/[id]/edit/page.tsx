@@ -9,7 +9,7 @@ import {
 export const dynamic = "force-dynamic";
 
 export const metadata = {
-  title: "Edit experience — Admin",
+  title: "Edit pengalaman — Admin",
 };
 
 export default async function EditExperiencePage({
@@ -41,12 +41,12 @@ export default async function EditExperiencePage({
   return (
     <div>
       <h1 className="mb-8 text-2xl font-bold tracking-tight text-zinc-900 dark:text-zinc-50">
-        Edit experience
+        Edit pengalaman
       </h1>
       <ExperienceForm
         action={updateExperience.bind(null, id)}
         initial={initial}
-        submitLabel="Save changes"
+        submitLabel="Simpan perubahan"
       />
     </div>
   );

@@ -1,7 +1,7 @@
 import { LoginForm } from "./login-form";
 
 export const metadata = {
-  title: "Login — Admin",
+  title: "Masuk — Admin",
 };
 
 export default async function LoginPage({

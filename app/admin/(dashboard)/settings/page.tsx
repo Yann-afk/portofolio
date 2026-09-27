@@ -7,7 +7,7 @@ import { SettingsForm } from "./settings-form";
 export const dynamic = "force-dynamic";
 
 export const metadata = {
-  title: "Settings — Admin",
+  title: "Pengaturan — Admin",
 };
 
 export default async function SettingsPage() {
@@ -16,7 +16,7 @@ export default async function SettingsPage() {
   if (!user) {
     return (
       <p className="text-sm text-red-600 dark:text-red-400">
-        Not authenticated.
+        Tidak terautentikasi.
       </p>
     );
   }
@@ -47,8 +47,8 @@ export default async function SettingsPage() {
     <div className="flex flex-col gap-8">
       <div>
         <PageHeader
-          title="Settings"
-          description="Profil yang tampil di Hero dan About."
+          title="Pengaturan"
+          description="Profil yang tampil di Hero dan Tentang."
         />
         <SettingsForm profile={values} />
       </div>

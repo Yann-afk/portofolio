@@ -134,7 +134,7 @@ export function Hero({ profile }: { profile: Profile }) {
             variants={item}
             className="text-4xl font-bold leading-tight tracking-tight text-zinc-900 sm:text-6xl dark:text-zinc-50"
           >
-            Hi, I&apos;m{" "}
+            Halo, saya{" "}
             <span className="bg-gradient-to-r from-violet-600 to-fuchsia-500 bg-clip-text text-transparent dark:from-violet-400 dark:to-fuchsia-400">
               {profile.name}
             </span>
@@ -174,7 +174,7 @@ export function Hero({ profile }: { profile: Profile }) {
               href="#contact"
               className="group inline-flex items-center gap-2 rounded-xl bg-zinc-900 px-6 py-3 text-sm font-semibold text-white shadow-sm transition-all hover:bg-violet-600 hover:shadow-violet-500/25 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-violet-400"
             >
-              Contact Me
+              Hubungi Saya
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
             </a>
             <a
@@ -182,7 +182,7 @@ export function Hero({ profile }: { profile: Profile }) {
               className="inline-flex items-center gap-2 rounded-xl border border-zinc-200 bg-white px-6 py-3 text-sm font-semibold text-zinc-700 transition-colors hover:border-zinc-300 hover:bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-300 dark:hover:border-zinc-700 dark:hover:bg-zinc-800"
             >
               <Download className="h-4 w-4" />
-              Resume
+              Lihat CV
             </a>
           </motion.div>
 
@@ -211,10 +211,10 @@ export function Hero({ profile }: { profile: Profile }) {
         animate={{ opacity: 1 }}
         transition={{ delay: 1.4 }}
         className="absolute bottom-8 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-2 text-xs font-medium text-zinc-400 sm:flex"
-        aria-label="Scroll to About section"
+        aria-label="Gulir ke section Tentang"
       >
         <FileText className="h-4 w-4" />
-        scroll down
+        gulir ke bawah
         <motion.span
           animate={{ y: [0, 6, 0] }}
           transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}

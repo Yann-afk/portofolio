@@ -45,28 +45,28 @@ export function ExperienceForm({
       <ErrorNotice error={state?.error} />
 
       <div className="grid gap-5 sm:grid-cols-2">
-        <Field label="Company">
+        <Field label="Perusahaan">
           <Input
             name="company_name"
             required
             defaultValue={initial?.companyName}
           />
         </Field>
-        <Field label="Role">
+        <Field label="Peran">
           <Input name="role" required defaultValue={initial?.role} />
         </Field>
       </div>
 
       <div className="grid gap-5 sm:grid-cols-3">
-        <Field label="Type">
+        <Field label="Jenis">
           <Select name="type" defaultValue={initial?.type ?? "work"}>
-            <option value="work">Work</option>
-            <option value="education">Education</option>
-            <option value="organization">Organization</option>
-            <option value="award">Award</option>
+            <option value="work">Kerja</option>
+            <option value="education">Pendidikan</option>
+            <option value="organization">Organisasi</option>
+            <option value="award">Penghargaan</option>
           </Select>
         </Field>
-        <Field label="Start date">
+        <Field label="Tanggal mulai">
           <Input
             type="date"
             name="start_date"
@@ -74,7 +74,7 @@ export function ExperienceForm({
             defaultValue={initial?.startDate}
           />
         </Field>
-        <Field label="End date" hint="Nonaktifkan jika masih berlangsung.">
+        <Field label="Tanggal selesai" hint="Nonaktifkan jika masih berlangsung.">
           <Input
             type="date"
             name="end_date"
@@ -89,7 +89,7 @@ export function ExperienceForm({
           name="is_current"
           defaultChecked={initial?.isCurrent}
         />
-        <Field label="Sort order">
+        <Field label="Urutan">
           <Input
             type="number"
             name="sort_order"
@@ -99,7 +99,7 @@ export function ExperienceForm({
         </Field>
       </div>
 
-      <Field label="Description">
+      <Field label="Deskripsi">
         <Textarea
           name="description"
           rows={4}
@@ -108,7 +108,7 @@ export function ExperienceForm({
       </Field>
 
       <div className="flex items-center gap-3 pt-2">
-        <SubmitButton pendingText="Saving...">{submitLabel}</SubmitButton>
+        <SubmitButton pendingText="Menyimpan...">{submitLabel}</SubmitButton>
         <a
           href="/admin/experience"
           className="text-sm font-medium text-zinc-500 transition-colors hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100"

@@ -7,10 +7,10 @@ export const placeholderProfile: Profile = {
   role: "Full-Stack Developer",
   roles: ["Full-Stack Developer", "UI/UX Enthusiast", "Open Source Contributor"],
   tagline:
-    "I build fast, accessible and delightful web experiences that people love to use.",
-  bio: "Hi! I'm Abdullah Mubarok Maspeke, a Full-Stack Developer based in Jakarta, Indonesia. I love turning complex problems into simple, beautiful and intuitive products. When I'm not coding, you'll find me sketching UI ideas, contributing to open source, or exploring new tech.\n\nWith 3+ years of experience shipping products from idea to production, I care deeply about performance, clean code, and the little details that make a great user experience.",
+    "Saya membangun pengalaman web yang cepat, aksesibel, dan menyenangkan untuk dipakai.",
+  bio: "Halo! Saya Abdullah Mubarok Maspeke, Full-Stack Developer yang berbasis di Jakarta, Indonesia. Saya menikmati mengubah masalah sulit menjadi produk yang sederhana dan enak dipakai. Saat tidak ngoding, saya sedang menggambar ide UI, berkontribusi ke open source, atau mencoba teknologi baru.\n\nDengan pengalaman lebih dari 3 tahun dalam membangun produk dari ide sampai produksi, saya peduli pada performa, kode yang bersih, dan detail kecil yang membuat pengalaman pengguna terasa bagus.",
   location: "Jakarta, Indonesia",
-  availability: "Available for freelance",
+  availability: "Tersedia untuk freelance",
   resume: "/resume.pdf",
   avatarUrl: null,
   socials: {
@@ -20,9 +20,9 @@ export const placeholderProfile: Profile = {
 };
 
 export const placeholderStats: Stat[] = [
-  { value: "3+", label: "Years of Experience" },
-  { value: "20+", label: "Projects Shipped" },
-  { value: "10+", label: "Happy Clients" },
+  { value: "3+", label: "Tahun Pengalaman" },
+  { value: "20+", label: "Project Selesai" },
+  { value: "10+", label: "Klien Puas" },
 ];
 
 export const placeholderSkills: Skill[] = [
@@ -41,10 +41,10 @@ export const placeholderSkills: Skill[] = [
 export const placeholderProjects: Project[] = [
   {
     id: "p1",
-    title: "E-Commerce Platform",
+    title: "Platform E-Commerce",
     slug: "e-commerce-platform",
     description:
-      "A headless commerce platform with real-time inventory, Stripe payments, and an admin dashboard.",
+      "Platform e-commerce headless dengan stok real-time, pembayaran Stripe, dan dashboard admin.",
     coverImageUrl: null,
     liveUrl: "https://example.com",
     githubUrl: "https://github.com/yourusername/ecommerce",
@@ -54,10 +54,10 @@ export const placeholderProjects: Project[] = [
   },
   {
     id: "p2",
-    title: "Task Manager App",
+    title: "Aplikasi Manager Tugas",
     slug: "task-manager-app",
     description:
-      "A cross-platform productivity app with offline support, kanban board, and team collaboration.",
+      "Aplikasi produktivitas lintas platform dengan dukungan offline, papan kanban, dan kolaborasi tim.",
     coverImageUrl: null,
     liveUrl: "https://example.com",
     githubUrl: "https://github.com/yourusername/taskmanager",
@@ -67,10 +67,10 @@ export const placeholderProjects: Project[] = [
   },
   {
     id: "p3",
-    title: "Finance Dashboard UI",
+    title: "UI Dashboard Keuangan",
     slug: "finance-dashboard-ui",
     description:
-      "A clean, data-dense dashboard design for tracking personal finances with dark mode support.",
+      "Desain dashboard bersih dan padat data untuk melacak keuangan pribadi, dengan dukungan mode gelap.",
     coverImageUrl: null,
     liveUrl: "https://example.com",
     githubUrl: null,
@@ -80,10 +80,10 @@ export const placeholderProjects: Project[] = [
   },
   {
     id: "p4",
-    title: "Real-time Chat App",
+    title: "Aplikasi Chat Real-time",
     slug: "real-time-chat-app",
     description:
-      "A real-time messaging app with typing indicators, read receipts, and end-to-end encryption.",
+      "Aplikasi pesan real-time dengan indikator mengetik, tanda sudah dibaca, dan enkripsi end-to-end.",
     coverImageUrl: null,
     liveUrl: "https://example.com",
     githubUrl: "https://github.com/yourusername/chat",
@@ -93,10 +93,10 @@ export const placeholderProjects: Project[] = [
   },
   {
     id: "p5",
-    title: "Fitness Tracking App",
+    title: "Aplikasi Pelacak Fitness",
     slug: "fitness-tracking-app",
     description:
-      "A mobile app that tracks workouts, calories, and progress with beautiful data visualizations.",
+      "Aplikasi mobile yang melacak latihan, konsumsi kalori, dan kemajuan dengan visualisasi data yang menarik.",
     coverImageUrl: null,
     liveUrl: "https://example.com",
     githubUrl: "https://github.com/yourusername/fitness",
@@ -106,10 +106,10 @@ export const placeholderProjects: Project[] = [
   },
   {
     id: "p6",
-    title: "Travel Booking Website",
+    title: "Website Pemesanan Perjalanan",
     slug: "travel-booking-website",
     description:
-      "UX research and high-fidelity UI for a travel booking platform with a focus on frictionless flows.",
+      "Riset UX dan UI high-fidelity untuk platform pemesanan perjalanan dengan fokus pada alur tanpa hambatan.",
     coverImageUrl: null,
     liveUrl: "https://example.com",
     githubUrl: null,
@@ -130,7 +130,7 @@ export const placeholderExperiences: Experience[] = [
     startDate: "2024-01-01",
     endDate: null,
     description:
-      "Leading the frontend team to build a design system and micro-frontends serving 1M+ monthly users.",
+      "Memimpin tim frontend membangun design system dan micro-frontend yang melayani 1 juta+ pengguna per bulan.",
     tags: ["React", "TypeScript", "Design Systems"],
   },
   {
@@ -143,33 +143,33 @@ export const placeholderExperiences: Experience[] = [
     startDate: "2022-06-01",
     endDate: "2024-01-01",
     description:
-      "Shipped core features across web and mobile, cut page load time by 60%, and grew the platform to 100K users.",
+      "Merilis fitur inti untuk web dan mobile, memangkas waktu muat halaman 60%, dan mendorong pertumbuhan platform hingga 100 ribu pengguna.",
     tags: ["Next.js", "Node.js", "PostgreSQL"],
   },
   {
     id: "e3",
     period: "Jan 2021 — Jun 2022",
-    role: "Freelance Web Developer",
+    role: "Web Developer Freelance",
     company: "Independent",
     type: "work",
     isCurrent: false,
     startDate: "2021-01-01",
     endDate: "2022-06-01",
     description:
-      "Collaborated with 10+ clients across industries to design, build, and launch marketing sites and web apps.",
+      "Berkarya dengan 10+ klien dari berbagai industri untuk merancang, membangun, dan meluncurkan situs pemasaran serta web app.",
     tags: ["React", "Tailwind CSS", "Vercel"],
   },
   {
     id: "e4",
     period: "Aug 2019 — Jun 2021",
-    role: "B.Sc. Computer Science",
-    company: "University of Indonesia",
+    role: "S.Kom. Ilmu Komputer",
+    company: "Universitas Indonesia",
     type: "education",
     isCurrent: false,
     startDate: "2019-08-01",
     endDate: "2021-06-01",
     description:
-      "Focused on web engineering, human-computer interaction, and open source contributions.",
+      "Fokus pada rekayasa web, interaksi manusia-komputer, dan kontribusi open source.",
     tags: ["Algorithms", "HCI", "Open Source"],
   },
 ];

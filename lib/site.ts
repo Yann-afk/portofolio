@@ -1,8 +1,8 @@
 export const navLinks = [
-  { label: "About", href: "#about" },
-  { label: "Projects", href: "#projects" },
-  { label: "Experience", href: "#experience" },
-  { label: "Contact", href: "#contact" },
+  { label: "Tentang", href: "#about" },
+  { label: "Proyek", href: "#projects" },
+  { label: "Pengalaman", href: "#experience" },
+  { label: "Kontak", href: "#contact" },
 ];
 
 /**
@@ -20,7 +20,7 @@ export const projectCategoryOptions = [
   { id: "ai", label: "AI / Machine Learning" },
   { id: "game", label: "Game" },
   { id: "opensource", label: "Open Source" },
-  { id: "experiment", label: "Experiment" },
+  { id: "experiment", label: "Eksperimen" },
 ] as const;
 
 export type ProjectCategory = (typeof projectCategoryOptions)[number]["id"];
@@ -45,11 +45,27 @@ export function projectCategoryLabel(value: string): string {
 
 /** Filter pills for the public site: "All" plus every real category. */
 export const projectCategories = [
-  { id: "all" as const, label: "All" },
+  { id: "all" as const, label: "Semua" },
   ...projectCategoryOptions.map(
     (option) => option as { id: ProjectCategory; label: string },
   ),
 ];
+
+/**
+ * Display labels for the experience `type` column. The stored values stay in
+ * English because they are written to the database and already exist in
+ * existing rows; only what the admin sees is translated.
+ */
+const experienceTypeLabels: Record<string, string> = {
+  work: "Kerja",
+  education: "Pendidikan",
+  organization: "Organisasi",
+  award: "Penghargaan",
+};
+
+export function experienceTypeLabel(value: string): string {
+  return experienceTypeLabels[value] ?? value;
+}
 
 export const projectGradients = [
   "from-violet-500 via-purple-500 to-fuchsia-500",

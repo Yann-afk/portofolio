@@ -28,7 +28,7 @@ function ProjectCard({ project }: { project: Project }) {
         target="_blank"
         rel="noopener noreferrer"
         className="relative block aspect-[16/10] overflow-hidden"
-        aria-label={`Open ${project.title}`}
+        aria-label={`Buka ${project.title}`}
       >
         {project.coverImageUrl ? (
           <Image
@@ -49,7 +49,7 @@ function ProjectCard({ project }: { project: Project }) {
         <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent" />
         {project.featured ? (
           <span className="absolute left-4 top-4 rounded-full bg-black/40 px-3 py-1 font-mono text-xs font-medium text-white backdrop-blur">
-            ★ Featured
+              ★ Unggulan
           </span>
         ) : null}
         <span className="absolute bottom-4 left-4 font-mono text-sm font-semibold text-white">
@@ -80,7 +80,7 @@ function ProjectCard({ project }: { project: Project }) {
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1.5 text-sm font-medium text-zinc-700 transition-colors hover:text-violet-600 dark:text-zinc-300 dark:hover:text-violet-400"
             >
-              Live Demo <ArrowUpRight className="h-3.5 w-3.5" />
+              Demo <ArrowUpRight className="h-3.5 w-3.5" />
             </a>
           ) : null}
           {project.githubUrl ? (
@@ -90,7 +90,7 @@ function ProjectCard({ project }: { project: Project }) {
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1.5 text-sm font-medium text-zinc-700 transition-colors hover:text-violet-600 dark:text-zinc-300 dark:hover:text-violet-400"
             >
-              <GitHubIcon className="h-3.5 w-3.5" /> Source
+              <GitHubIcon className="h-3.5 w-3.5" /> Kode
             </a>
           ) : null}
         </div>
@@ -118,9 +118,9 @@ export function Projects({ projects }: { projects: Project[] }) {
       <div className="mx-auto max-w-6xl px-6">
         <Reveal>
           <SectionHeading
-            eyebrow="Projects"
-            title="Things I've built"
-            description="A curated selection of projects I've designed and developed. Filter by category to see the highlights."
+            eyebrow="Proyek"
+            title="Yang Pernah Saya Bangun"
+            description="Kumpulan project pilihan yang saya rancang dan kembangkan. Filter berdasarkan kategori untuk melihat sorotan."
           />
         </Reveal>
 

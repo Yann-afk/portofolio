@@ -65,15 +65,15 @@ export function ProjectForm({
       <ErrorNotice error={state?.error} />
 
       <div className="grid gap-5 sm:grid-cols-2">
-        <Field label="Title">
+        <Field label="Judul">
           <Input name="title" required defaultValue={initial?.title} />
         </Field>
-        <Field label="Slug" hint="Kosongkan untuk auto-generate dari title.">
+        <Field label="Slug" hint="Kosongkan untuk auto-generate dari judul.">
           <Input name="slug" defaultValue={initial?.slug} />
         </Field>
       </div>
 
-      <Field label="Description">
+      <Field label="Deskripsi">
         <Textarea
           name="description"
           required
@@ -83,14 +83,14 @@ export function ProjectForm({
       </Field>
 
       <div className="grid gap-5 sm:grid-cols-2">
-        <Field label="Cover image URL" hint="Kosongkan untuk pakai gradient.">
+        <Field label="URL cover image" hint="Kosongkan untuk pakai gradient.">
           <Input
             type="url"
             name="cover_image_url"
             defaultValue={initial?.coverImageUrl ?? ""}
           />
         </Field>
-        <Field label="Category">
+        <Field label="Kategori">
           <Select
             name="category"
             defaultValue={
@@ -107,14 +107,14 @@ export function ProjectForm({
       </div>
 
       <div className="grid gap-5 sm:grid-cols-2">
-        <Field label="Live URL">
+        <Field label="URL live">
           <Input
             type="url"
             name="live_url"
             defaultValue={initial?.liveUrl ?? ""}
           />
         </Field>
-        <Field label="GitHub URL">
+        <Field label="URL GitHub">
           <Input
             type="url"
             name="github_url"
@@ -124,7 +124,7 @@ export function ProjectForm({
       </div>
 
       <div className="grid gap-5 sm:grid-cols-2">
-        <Field label="Sort order" hint="Semakin kecil, semakin atas.">
+        <Field label="Urutan" hint="Semakin kecil, semakin atas.">
           <Input
             type="number"
             name="sort_order"
@@ -133,7 +133,7 @@ export function ProjectForm({
         </Field>
         <div className="flex items-end pb-1">
           <Checkbox
-            label="Featured (tampil pertama)"
+            label="Unggulan (tampil pertama)"
             name="featured"
             defaultChecked={initial?.featured}
           />
@@ -189,7 +189,7 @@ export function ProjectForm({
       </fieldset>
 
       <div className="flex items-center gap-3 pt-2">
-        <SubmitButton pendingText="Saving...">{submitLabel}</SubmitButton>
+        <SubmitButton pendingText="Menyimpan...">{submitLabel}</SubmitButton>
         <a
           href="/admin/projects"
           className="text-sm font-medium text-zinc-500 transition-colors hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100"

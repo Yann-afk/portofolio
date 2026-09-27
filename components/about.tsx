@@ -8,17 +8,17 @@ const highlights = [
   {
     Icon: Code2,
     title: "Frontend",
-    text: "Interactive, performant interfaces with React & Next.js.",
+    text: "Antarmuka interaktif dan performant dengan React & Next.js.",
   },
   {
     Icon: Database,
     title: "Backend",
-    text: "Robust APIs and databases with Node.js & PostgreSQL.",
+    text: "API dan database yang andal dengan Node.js & PostgreSQL.",
   },
   {
     Icon: PenTool,
     title: "UI/UX",
-    text: "Clean, accessible designs crafted in Figma, shipped pixel-perfect.",
+    text: "Desain bersih dan aksesibel yang dibuat di Figma, lalu dikirim pixel-perfect.",
   },
 ];
 
@@ -53,10 +53,10 @@ export function About({
         <Reveal>
           <div className="mb-12 flex max-w-2xl flex-col gap-4">
             <span className="font-mono text-sm font-medium text-violet-600 dark:text-violet-400">
-              {"// "}About Me
+              {"// "}Tentang Saya
             </span>
             <h2 className="text-3xl font-bold tracking-tight text-zinc-900 sm:text-4xl dark:text-zinc-50">
-              Turning ideas into real, working products.
+              Mengubah ide menjadi produk nyata yang berjalan.
             </h2>
           </div>
         </Reveal>

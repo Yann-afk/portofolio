@@ -15,19 +15,19 @@ export function SkillForm() {
     >
       <ErrorNotice error={state?.error} />
       <div className="grid gap-4 sm:grid-cols-[1fr_1fr_80px_auto]">
-        <Field label="Name">
+        <Field label="Nama">
           <Input name="name" required placeholder="React" />
         </Field>
-        <Field label="Category">
+        <Field label="Kategori">
           <Input name="category" placeholder="Frontend" />
         </Field>
-        <Field label="Order">
+        <Field label="Urutan">
           <Input type="number" name="sort_order" defaultValue={0} />
         </Field>
         <div className="flex items-end">
           <SubmitButton
             className="h-10 w-10 rounded-xl p-0"
-            pendingText="..."
+            pendingText="Menyimpan..."
           >
             <Plus className="h-4 w-4" />
           </SubmitButton>

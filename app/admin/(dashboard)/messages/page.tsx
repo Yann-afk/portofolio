@@ -6,7 +6,7 @@ import { deleteMessage, toggleMessageRead } from "../actions";
 export const dynamic = "force-dynamic";
 
 export const metadata = {
-  title: "Messages — Admin",
+  title: "Pesan — Admin",
 };
 
 export default async function MessagesPage() {
@@ -21,7 +21,7 @@ export default async function MessagesPage() {
   return (
     <div>
       <PageHeader
-        title="Messages"
+        title="Pesan"
         description={`${unreadCount} belum dibaca.`}
       />
 

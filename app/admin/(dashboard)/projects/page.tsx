@@ -8,7 +8,7 @@ import { deleteProject } from "../actions";
 export const dynamic = "force-dynamic";
 
 export const metadata = {
-  title: "Projects — Admin",
+  title: "Proyek — Admin",
 };
 
 export default async function ProjectsPage() {
@@ -21,7 +21,7 @@ export default async function ProjectsPage() {
   return (
     <div>
       <PageHeader
-        title="Projects"
+        title="Proyek"
         description={`${projects?.length ?? 0} proyek terdaftar.`}
         action={
           <Link
@@ -29,7 +29,7 @@ export default async function ProjectsPage() {
             className="inline-flex items-center gap-2 rounded-xl bg-zinc-900 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-violet-600 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-violet-400"
           >
             <Plus className="h-4 w-4" />
-            New project
+            Project baru
           </Link>
         }
       />
@@ -52,7 +52,7 @@ export default async function ProjectsPage() {
                   </h3>
                   {p.featured ? (
                     <span className="rounded-full bg-violet-100 px-2 py-0.5 font-mono text-xs font-medium text-violet-700 dark:bg-violet-500/10 dark:text-violet-400">
-                      featured
+                      unggulan
                     </span>
                   ) : null}
                   <span className="rounded-full bg-zinc-100 px-2 py-0.5 font-mono text-xs text-zinc-600 dark:bg-zinc-800 dark:text-zinc-400">
@@ -83,7 +83,7 @@ export default async function ProjectsPage() {
         </ul>
       ) : (
         <p className="rounded-2xl border border-dashed border-zinc-300 bg-white p-10 text-center text-sm text-zinc-500 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-400">
-          Belum ada project. Klik &quot;New project&quot; untuk menambah.
+          Belum ada project. Klik &quot;Project baru&quot; untuk menambah.
         </p>
       )}
     </div>

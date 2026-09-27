@@ -73,7 +73,7 @@ export function Checkbox({
 
 export function SubmitButton({
   children,
-  pendingText = "Saving...",
+  pendingText = "Menyimpan...",
   className,
 }: {
   children: ReactNode;
@@ -98,8 +98,8 @@ export function SubmitButton({
 
 export function DeleteButton({
   action,
-  confirm = "Delete this item?",
-  children = "Delete",
+  confirm = "Hapus item ini?",
+  children = "Hapus",
 }: {
   action: (formData: FormData) => void | Promise<void>;
   confirm?: string;

@@ -11,9 +11,9 @@ export function Experience({ experiences }: { experiences: ExperienceType[] }) {
       <div className="mx-auto max-w-4xl px-6">
         <Reveal>
           <SectionHeading
-            eyebrow="Experience"
-            title="My journey so far"
-            description="From my first line of code to leading teams — the milestones along the way."
+            eyebrow="Pengalaman"
+            title="Perjalanan Saya Sejauh Ini"
+            description="Dari baris kode pertama saya hingga memimpin tim — tonggak-tonggak penting di sepanjang jalan."
           />
         </Reveal>
 

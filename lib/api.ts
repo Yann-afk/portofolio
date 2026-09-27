@@ -15,14 +15,14 @@ import {
   placeholderSkills,
 } from "./placeholder";
 
-const monthYear = new Intl.DateTimeFormat("en", {
+const monthYear = new Intl.DateTimeFormat("id", {
   month: "short",
   year: "numeric",
 });
 
 function formatPeriod(start: string, end: string | null, isCurrent: boolean) {
   const s = monthYear.format(new Date(start));
-  const e = isCurrent || !end ? "Present" : monthYear.format(new Date(end));
+  const e = isCurrent || !end ? "Sekarang" : monthYear.format(new Date(end));
   return `${s} — ${e}`;
 }
 
@@ -119,9 +119,9 @@ function computeStats(
     years = Math.max(1, Math.round((end - start) / (365.25 * 24 * 3600 * 1000)));
   }
   return [
-    { value: `${years}+`, label: "Years of Experience" },
-    { value: `${projects.length}`, label: "Projects Shipped" },
-    { value: `${skills.length}`, label: "Skills Mastered" },
+    { value: `${years}+`, label: "Tahun Pengalaman" },
+    { value: `${projects.length}`, label: "Project Selesai" },
+    { value: `${skills.length}`, label: "Skill Dikuasai" },
   ];
 }
 

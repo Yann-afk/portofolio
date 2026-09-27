@@ -63,7 +63,7 @@ export function PasswordForm() {
       </div>
 
       <div className="pt-2">
-        <SubmitButton pendingText="Updating...">Update password</SubmitButton>
+        <SubmitButton pendingText="Memperbarui...">Ubah password</SubmitButton>
       </div>
     </form>
   );

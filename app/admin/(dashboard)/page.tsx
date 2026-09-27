@@ -11,7 +11,7 @@ import { PageHeader } from "./admin-ui";
 
 export const dynamic = "force-dynamic";
 
-export default async function DashboardPage() {
+export default async function DasborPage() {
   const admin = createAdminClient();
 
   const [projects, skills, experiences, messageCount, recent] =
@@ -34,25 +34,25 @@ export default async function DashboardPage() {
 
   const cards = [
     {
-      label: "Projects",
+      label: "Proyek",
       value: projects.count ?? 0,
       href: "/admin/projects",
       icon: FolderKanban,
     },
     {
-      label: "Skills",
+      label: "Skill",
       value: skills.count ?? 0,
       href: "/admin/skills",
       icon: Tags,
     },
     {
-      label: "Experiences",
+      label: "Pengalaman",
       value: experiences.count ?? 0,
       href: "/admin/experience",
       icon: Briefcase,
     },
     {
-      label: "Unread messages",
+      label: "Pesan belum dibaca",
       value: messageCount.count ?? 0,
       href: "/admin/messages",
       icon: Inbox,
@@ -62,7 +62,7 @@ export default async function DashboardPage() {
   return (
     <div>
       <PageHeader
-        title="Dashboard"
+        title="Dasbor"
         description="Ringkasan konten portofolio kamu."
       />
 
@@ -93,7 +93,7 @@ export default async function DashboardPage() {
             href="/admin/messages"
             className="text-sm font-medium text-violet-600 hover:text-violet-500 dark:text-violet-400"
           >
-            Lihat semua â†’
+            Lihat semua →
           </Link>
         </div>
 

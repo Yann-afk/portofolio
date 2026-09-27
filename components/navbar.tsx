@@ -53,7 +53,7 @@ export function Navbar() {
           <ThemeToggle />
           <button
             type="button"
-            aria-label="Toggle menu"
+            aria-label="Buka menu"
             onClick={() => setOpen((v) => !v)}
             className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-zinc-200 bg-white/80 text-zinc-600 backdrop-blur transition-colors hover:bg-zinc-100 md:hidden dark:border-zinc-800 dark:bg-zinc-900/80 dark:text-zinc-400 dark:hover:bg-zinc-800"
           >

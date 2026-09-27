@@ -19,8 +19,8 @@ export function Footer({ profile }: { profile: Profile }) {
         </a>
 
         <p className="text-center text-sm text-zinc-500 dark:text-zinc-400">
-          © {new Date().getFullYear()} {profile.name}. Designed & built with
-          Next.js, Tailwind & Framer Motion.
+          © {new Date().getFullYear()} {profile.name}. Dirancang &amp; dibangun
+          dengan Next.js, Tailwind &amp; Framer Motion.
         </p>
 
         <div className="flex items-center gap-2">

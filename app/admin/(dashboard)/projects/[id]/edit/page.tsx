@@ -65,7 +65,7 @@ export default async function EditProjectPage({
         action={updateProject.bind(null, id)}
         skills={skillList}
         initial={initial}
-        submitLabel="Save changes"
+        submitLabel="Simpan perubahan"
       />
     </div>
   );

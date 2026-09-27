@@ -20,7 +20,7 @@ export function LoginForm({
           <span className="text-violet-600 dark:text-violet-400">panel</span>
         </p>
         <h1 className="mt-4 text-2xl font-bold tracking-tight text-zinc-900 dark:text-zinc-50">
-          Welcome back
+          Selamat datang kembali
         </h1>
         <p className="mt-1 text-sm text-zinc-500 dark:text-zinc-400">
           Masuk untuk mengelola data portofolio kamu.
@@ -67,8 +67,8 @@ export function LoginForm({
           </div>
         </label>
 
-        <SubmitButton className="mt-1 w-full" pendingText="Signing in...">
-          Sign in
+        <SubmitButton className="mt-1 w-full" pendingText="Memproses...">
+          Masuk
         </SubmitButton>
       </form>
     </div>

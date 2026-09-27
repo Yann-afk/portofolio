@@ -32,7 +32,7 @@ export async function POST(request: Request) {
   try {
     body = (await request.json()) as Record<string, unknown>;
   } catch {
-    return NextResponse.json({ error: "Invalid request." }, { status: 400 });
+    return NextResponse.json({ error: "Permintaan tidak valid." }, { status: 400 });
   }
 
   const sender_name = String(body.name ?? "").trim();
@@ -41,15 +41,15 @@ export async function POST(request: Request) {
 
   if (!sender_name || !sender_email || !message) {
     return NextResponse.json(
-      { error: "All fields are required." },
+      { error: "Semua kolom wajib diisi." },
       { status: 400 },
     );
   }
   if (sender_name.length > MAX_NAME || sender_email.length > MAX_EMAIL || message.length > MAX_MESSAGE) {
-    return NextResponse.json({ error: "Input too long." }, { status: 400 });
+    return NextResponse.json({ error: "Input terlalu panjang." }, { status: 400 });
   }
   if (!EMAIL_RE.test(sender_email)) {
-    return NextResponse.json({ error: "Invalid email address." }, { status: 400 });
+    return NextResponse.json({ error: "Alamat email tidak valid." }, { status: 400 });
   }
 
   const admin = createAdminClient();

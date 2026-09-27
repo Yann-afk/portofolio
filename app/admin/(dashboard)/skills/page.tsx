@@ -28,7 +28,7 @@ export default async function SkillsPage() {
     <div>
       <PageHeader
         title="Skills"
-        description="Skills tampil di marquee halaman About, dan bisa dihubungkan ke project."
+        description="Skill tampil di marquee halaman Tentang, dan bisa dihubungkan ke project."
       />
 
       <SkillForm />

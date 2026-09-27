@@ -6,7 +6,7 @@ import { ProjectForm } from "../project-form";
 export const dynamic = "force-dynamic";
 
 export const metadata = {
-  title: "New project — Admin",
+  title: "Project baru — Admin",
 };
 
 export default async function NewProjectPage() {
@@ -27,12 +27,12 @@ export default async function NewProjectPage() {
   return (
     <div>
       <h1 className="mb-8 text-2xl font-bold tracking-tight text-zinc-900 dark:text-zinc-50">
-        New project
+        Project baru
       </h1>
       <ProjectForm
         action={createProject}
         skills={skillList}
-        submitLabel="Create project"
+        submitLabel="Buat project"
       />
     </div>
   );

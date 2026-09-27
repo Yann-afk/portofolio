@@ -12,8 +12,8 @@ import {
 } from "../admin-ui";
 
 const socialFields = [
-  { key: "github", label: "GitHub URL" },
-  { key: "whatsapp", label: "WhatsApp (wa.me/…) URL" },
+  { key: "github", label: "URL GitHub" },
+  { key: "whatsapp", label: "URL WhatsApp (wa.me/…)" },
 ] as const;
 
 export function SettingsForm({
@@ -40,7 +40,7 @@ export function SettingsForm({
       <ErrorNotice error={state?.error} />
 
       <div className="grid gap-5 sm:grid-cols-2">
-        <Field label="Name">
+        <Field label="Nama">
           <Input name="name" required defaultValue={value("name")} />
         </Field>
         <Field label="Username" hint="Untuk URL /username.">
@@ -49,15 +49,15 @@ export function SettingsForm({
         <Field label="Email">
           <Input type="email" name="email" defaultValue={value("email")} />
         </Field>
-        <Field label="Location">
+        <Field label="Lokasi">
           <Input name="location" defaultValue={value("location")} />
         </Field>
       </div>
 
-      <Field label="Role" hint="Contoh: Frontend Developer">
+      <Field label="Peran" hint="Contoh: Frontend Developer">
         <Input name="role" defaultValue={value("role")} />
       </Field>
-      <Field label="Roles" hint="Pisahkan dengan koma. Contoh: React, TypeScript, UI Design">
+      <Field label="Peran" hint="Pisahkan dengan koma. Contoh: React, TypeScript, UI Design">
         <Input name="roles" defaultValue={roles} />
       </Field>
 
@@ -68,19 +68,19 @@ export function SettingsForm({
         <Textarea name="bio" rows={5} defaultValue={value("bio")} />
       </Field>
 
-      <Field label="Availability" hint="Contoh: open to work">
+      <Field label="Status tersedia" hint="Contoh: tersedia untuk proyek">
         <Input name="availability" defaultValue={value("availability")} />
       </Field>
 
       <div className="grid gap-5 sm:grid-cols-2">
-        <Field label="Avatar URL">
+        <Field label="URL avatar">
           <Input
             type="url"
             name="avatar_url"
             defaultValue={value("avatar_url")}
           />
         </Field>
-        <Field label="Resume URL">
+        <Field label="URL CV">
           <Input
             type="url"
             name="resume_link"
@@ -92,7 +92,7 @@ export function SettingsForm({
       <fieldset>
         <legend className="mb-3 flex items-center gap-2 text-sm font-medium text-zinc-700 dark:text-zinc-300">
           <ExternalLink className="h-4 w-4" />
-          Social links
+          Tautan sosial
         </legend>
         <div className="grid gap-4 sm:grid-cols-2">
           {socialFields.map(({ key, label }) => (
@@ -108,7 +108,7 @@ export function SettingsForm({
       </fieldset>
 
       <div className="pt-2">
-        <SubmitButton pendingText="Saving...">Save profile</SubmitButton>
+        <SubmitButton pendingText="Menyimpan...">Simpan profil</SubmitButton>
       </div>
     </form>
   );

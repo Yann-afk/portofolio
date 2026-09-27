@@ -39,7 +39,7 @@ export function Contact({ profile }: { profile: Profile }) {
   };
 
   const openMailto = () => {
-    const subject = encodeURIComponent(`Portfolio inquiry from ${form.name}`);
+    const subject = encodeURIComponent(`Pertanyaan portfolio dari ${form.name}`);
     const body = encodeURIComponent(
       `${form.message}\n\n— ${form.name} (${form.email})`,
     );
@@ -80,9 +80,9 @@ export function Contact({ profile }: { profile: Profile }) {
       <div className="mx-auto max-w-6xl px-6">
         <Reveal>
           <SectionHeading
-            eyebrow="Contact"
-            title="Let's build something great"
-            description="Have a project in mind, a question, or just want to say hi? My inbox is always open — I usually reply within 24 hours."
+            eyebrow="Kontak"
+            title="Mari Bangun Sesuatu yang Hebat"
+            description="Punya ide project, mau bertanya, atau sekadar ingin menyapa? Kotak masuk saya selalu terbuka — biasanya saya balas dalam 24 jam."
           />
         </Reveal>
 
@@ -95,7 +95,7 @@ export function Contact({ profile }: { profile: Profile }) {
                 </span>
                 <div>
                   <p className="text-sm font-medium text-zinc-500 dark:text-zinc-400">
-                    Email me at
+                    Email saya di
                   </p>
                   <button
                     type="button"
@@ -113,7 +113,7 @@ export function Contact({ profile }: { profile: Profile }) {
                             exit={{ scale: 0.6, opacity: 0 }}
                             className="inline-flex items-center gap-1 rounded-full bg-emerald-100 px-2 py-0.5 font-mono text-xs text-emerald-700 dark:bg-emerald-500/10 dark:text-emerald-400"
                           >
-                            <Check className="h-3 w-3" /> Copied!
+                            <Check className="h-3 w-3" /> Tersalin!
                           </motion.span>
                         ) : (
                           <motion.span
@@ -138,7 +138,7 @@ export function Contact({ profile }: { profile: Profile }) {
                 </span>
                 <div>
                   <p className="text-sm font-medium text-zinc-500 dark:text-zinc-400">
-                    Chat on WhatsApp
+                    Chat via WhatsApp
                   </p>
                   <a
                     href={profile.socials.whatsapp}
@@ -157,7 +157,7 @@ export function Contact({ profile }: { profile: Profile }) {
                 </span>
                 <div>
                   <p className="text-sm font-medium text-zinc-500 dark:text-zinc-400">
-                    Based in
+                    Berbasis di
                   </p>
                   <p className="mt-1 text-lg font-semibold text-zinc-900 dark:text-zinc-50">
                     {profile.location}
@@ -167,7 +167,7 @@ export function Contact({ profile }: { profile: Profile }) {
 
               <div>
                 <p className="mb-4 text-sm font-medium text-zinc-500 dark:text-zinc-400">
-                  Find me on
+                  Temukan saya di
                 </p>
                 <div className="flex items-center gap-3">
                   {socials.map(({ label, href, Icon }) => (
@@ -195,12 +195,12 @@ export function Contact({ profile }: { profile: Profile }) {
               <div className="grid gap-4 sm:grid-cols-2">
                 <label className="flex flex-col gap-2">
                   <span className="text-sm font-medium text-zinc-700 dark:text-zinc-300">
-                    Name
+                    Nama
                   </span>
                   <input
                     type="text"
                     required
-                    placeholder="Jane Doe"
+                    placeholder="Budi Santoso"
                     value={form.name}
                     onChange={(e) => setForm({ ...form, name: e.target.value })}
                     className={inputClasses}
@@ -213,7 +213,7 @@ export function Contact({ profile }: { profile: Profile }) {
                   <input
                     type="email"
                     required
-                    placeholder="jane@example.com"
+                    placeholder="budi@example.com"
                     value={form.email}
                     onChange={(e) => setForm({ ...form, email: e.target.value })}
                     className={inputClasses}
@@ -222,12 +222,12 @@ export function Contact({ profile }: { profile: Profile }) {
               </div>
               <label className="flex flex-col gap-2">
                 <span className="text-sm font-medium text-zinc-700 dark:text-zinc-300">
-                  Message
+                  Pesan
                 </span>
                 <textarea
                   required
                   rows={6}
-                  placeholder="Tell me about your project..."
+                  placeholder="Ceritakan tentang project Anda..."
                   value={form.message}
                   onChange={(e) =>
                     setForm({ ...form, message: e.target.value })
@@ -239,7 +239,7 @@ export function Contact({ profile }: { profile: Profile }) {
                 type="submit"
                 className="group mt-2 inline-flex items-center justify-center gap-2 rounded-xl bg-zinc-900 px-6 py-3.5 text-sm font-semibold text-white transition-all hover:bg-violet-600 hover:shadow-lg hover:shadow-violet-500/25 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-violet-400"
               >
-                Send Message
+                Kirim Pesan
                 <Send className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </button>
               <AnimatePresence>
@@ -250,7 +250,7 @@ export function Contact({ profile }: { profile: Profile }) {
                     exit={{ opacity: 0, height: 0 }}
                     className="overflow-hidden text-sm font-medium text-emerald-600 dark:text-emerald-400"
                   >
-                    Message sent. Talk soon!
+                    Pesan terkirim. Soon kita bicara!
                   </motion.p>
                 ) : null}
               </AnimatePresence>
